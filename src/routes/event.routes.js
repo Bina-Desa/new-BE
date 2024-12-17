@@ -7,10 +7,10 @@ const { getAllEvent, createEvent, getEventById, deleteEvent, editEvent } = requi
 
 // Rute untuk upload gambar
 router.get('/', getAllEvent)
-router.post('/', [upload.array('image')], createEvent);
+router.post('/', [authenticate, upload.array('image')], createEvent);
 router.get('/:id', getEventById)
-router.delete('/:id', deleteEvent)
-router.put('/:id', [upload.array('image')], editEvent)
+router.delete('/:id', authenticate, deleteEvent)
+router.put('/:id', [authenticate, upload.array('image')], editEvent)
 
 // Rute untuk menghapus gambar
 // router.delete('/delete/:id', destinationController.deleteDestination);

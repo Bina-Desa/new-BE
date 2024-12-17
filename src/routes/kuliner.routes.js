@@ -8,14 +8,14 @@ const { createProduct, getAllProduct, getProductById, deleteProduct, editProduct
 
 // Rute untuk upload gambar
 router.get('/warung', getAllWarungs)
-router.post('/warung', createWarung)
-router.put('/warung/:id', updateWarung)
-router.delete('/warung/:id', deleteWarung)
+router.post('/warung', authenticate, createWarung)
+router.put('/warung/:id', authenticate, updateWarung)
+router.delete('/warung/:id', authenticate, deleteWarung)
 
 router.get('/product', getAllProduct);
 router.get('/product/:id', getProductById);
-router.delete('/product/:id', deleteProduct);
-router.post('/product', [upload.array('image')], createProduct);
-router.put('/product/:id', [upload.array('image')], editProduct);
+router.delete('/product/:id', authenticate, deleteProduct);
+router.post('/product', [authenticate, upload.array('image')], createProduct);
+router.put('/product/:id', [authenticate, upload.array('image')], editProduct);
 
 module.exports = router;

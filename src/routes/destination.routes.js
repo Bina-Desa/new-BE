@@ -7,10 +7,10 @@ const { uploadDestination, getAllDestionation, deleteDestination, getDestination
 
 // Rute untuk upload gambar
 router.get('/', getAllDestionation)
-router.post('/', [upload.array('image')], uploadDestination);
+router.post('/', [authenticate, upload.array('image')], uploadDestination);
 router.get('/:id', getDestinationById)
-router.delete('/:id', deleteDestination)
-router.put('/:id', [upload.array('image')], editDestination)
+router.delete('/:id', authenticate, deleteDestination)
+router.put('/:id', [authenticate, upload.array('image')], editDestination)
 
 // Rute untuk menghapus gambar
 // router.delete('/delete/:id', destinationController.deleteDestination);
