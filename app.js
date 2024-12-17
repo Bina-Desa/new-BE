@@ -7,10 +7,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const destinationRoutes = require('./app/routes/destination.routes')
-const kulinerRoutes = require('./app/routes/kuliner.routes')
-const authRoutes = require('./app/routes/auth.routes')
-const eventRoutes = require('./app/routes/event.routes')
+const destinationRoutes = require('./src/routes/destination.routes');
+
+const kulinerRoutes = require('./src/routes/kuliner.routes')
+const authRoutes = require('./src/routes/auth.routes')
+const eventRoutes = require('./src/routes/event.routes')
 
 
 
