@@ -5,7 +5,7 @@ const path = require('path');
 
 const createEvent = async (req, res) => {
   try {
-    const { title, description, latitude, longitude, date } = req.body;
+    const { title, description, location, date } = req.body;
 
     // Simpan path file gambar
     const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
@@ -13,8 +13,7 @@ const createEvent = async (req, res) => {
     const newEvent = await Events.create({
       title,
       description,
-      latitude,
-      longitude,
+      location,
       date,
       image: imagePaths,
     });
@@ -46,10 +45,7 @@ const getAllEvent = async (req, res) => {
         id: event.id,
         title: event.title,
         description: event.description,
-        location: {
-          latitude: event.latitude,
-          longitude: event.longitude,
-        },
+        location: event.location,
         date: event.date,
         image: event.image,
       })),
@@ -97,8 +93,7 @@ const editEvent = async (req, res) => {
     const {
       title,
       description,
-      latitude,
-      longitude,
+      location,
       date,
     } = req.body
 
@@ -116,8 +111,7 @@ const editEvent = async (req, res) => {
 
     event.title = title || event.title;
     event.description = description || event.description;
-    event.latitude = latitude || event.latitude;
-    event.longitude = longitude || event.longitude;
+    event.location = location || event.location;
     event.date = date || event.date;
     event.image = imagePaths;
 

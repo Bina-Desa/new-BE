@@ -18,10 +18,7 @@ module.exports = {
       image: {
         type: Sequelize.JSON
       },
-      latitude: {
-        type: Sequelize.STRING
-      },
-      longitude: {
+      location: {
         type: Sequelize.STRING
       },
       date: {
