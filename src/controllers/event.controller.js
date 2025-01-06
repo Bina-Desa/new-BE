@@ -66,11 +66,12 @@ const deleteEvent = async (req, res) => {
       });
     }
 
-    if (event.image && event.image.length > 0) {
-      event.image.forEach(imagePaths => {
-        const filePath = path.join(__dirname, '../..', 'uploads', imagePaths.split('/').pop());
+    // Hapus gambar yang ada di storage (pastikan gambar ada di dalam array event.image)
+    if (Array.isArray(event.image) && event.image.length > 0) {
+      event.image.forEach(imagePath => {
+        const filePath = path.join(__dirname, '../..', 'uploads', imagePath.split('/').pop());
         if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
+          fs.unlinkSync(filePath); // Menghapus file gambar dari storage
         }
       });
     }
@@ -85,7 +86,7 @@ const deleteEvent = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 const editEvent = async (req, res) => {
   try {

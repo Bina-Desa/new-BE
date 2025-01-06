@@ -107,6 +107,7 @@ const uploadDestination = async (req, res) => {
     });
   }
 };
+
 const deleteDestination = async (req, res) => {
   const { id } = req.params;
 
@@ -120,7 +121,7 @@ const deleteDestination = async (req, res) => {
     }
 
     // Hapus gambar yang ada di storage (pastikan gambar ada di dalam array destinasi.image)
-    if (destinasi.image && destinasi.image.length > 0) {
+    if (Array.isArray(destinasi.image) && destinasi.image.length > 0) {
       destinasi.image.forEach(imagePath => {
         const filePath = path.join(__dirname, '../..', 'uploads', imagePath.split('/').pop());
         // Mengambil nama file dan menggabungkannya dengan path penyimpanan
@@ -134,11 +135,11 @@ const deleteDestination = async (req, res) => {
     await destinasi.destroy();
 
     res.status(200).json({
-      message: 'Destinasi beserta gambar berhasil dihapus.',
+      message: `Destinasi dengan ID ${id} berhasil dihapus.`,
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Gagal menghapus destinasi.',
+      message: 'Terjadi kesalahan pada server.',
       error: error.message,
     });
   }
